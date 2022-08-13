@@ -10,14 +10,18 @@ add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glad)
 
 include_directories(project/include/loader)
+include_directories(project/include/renderers)
 
 set(PROJECT_DIR project)
-set(SOURCES ${PROJECT_DIR}/main.cpp 
+set(SOURCES ${PROJECT_DIR}/main.cpp
             ${PROJECT_DIR}/src/loader/GlfwHandler.cpp 
             ${PROJECT_DIR}/src/loader/GlfwCallbacks.cpp
+            ${PROJECT_DIR}/src/renderers/opengl/OpenGLRenderer.cpp
             ${PROJECT_DIR}/include/loader/IWindowHandler.hpp
             ${PROJECT_DIR}/include/loader/GlfwHandler.hpp
             ${PROJECT_DIR}/include/loader/GlfwCallbacks.hpp
+            ${PROJECT_DIR}/include/renderers/IRenderer.hpp
+            ${PROJECT_DIR}/include/renderers/opengl/OpenGLRenderer.hpp
             )
             
 add_executable(unnamed-sandbox-project ${SOURCES})
