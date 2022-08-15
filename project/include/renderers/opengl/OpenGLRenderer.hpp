@@ -5,8 +5,6 @@
 
 class OpenGLRenderer : public IRenderer
 {
-private:
-    
 public:
     OpenGLRenderer();
     ~OpenGLRenderer();
@@ -15,6 +13,13 @@ public:
     void ResizeFramebuffer(int width, int height);
     void Render();
     void Cleanup();
+
+private:
+    unsigned int vao;
+    unsigned int vbo;
+
+    void SetupQuad();
 };
+
 
 #endif // OPEN_GL_RENDERER_HPP
