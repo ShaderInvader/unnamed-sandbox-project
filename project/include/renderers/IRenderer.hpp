@@ -4,7 +4,8 @@
 __interface IRenderer
 {
 public:
-    void Initialize();
+    bool Initialize(void* windowHandle, int width, int height);
+    void ResizeFramebuffer(int width, int height);
     void Render();
     void Cleanup();
 };

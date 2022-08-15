@@ -8,21 +8,13 @@ class OpenGLRenderer : public IRenderer
 private:
     
 public:
-    OpenGLRenderer(/* args */);
+    OpenGLRenderer();
     ~OpenGLRenderer();
 
-    void Initialize();
+    bool Initialize(void* windowHandle, int width, int height);
+    void ResizeFramebuffer(int width, int height);
     void Render();
     void Cleanup();
 };
-
-OpenGLRenderer::OpenGLRenderer(/* args */)
-{
-}
-
-OpenGLRenderer::~OpenGLRenderer()
-{
-}
-
 
 #endif // OPEN_GL_RENDERER_HPP
