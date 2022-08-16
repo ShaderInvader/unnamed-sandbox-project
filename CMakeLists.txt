@@ -9,23 +9,31 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glad)
 
-include_directories(project/include/loader)
+include_directories(project/include/window)
 include_directories(project/include/renderers)
 include_directories(project/include/shaders)
 include_directories(project/include/utilities)
+include_directories(project/include/game)
 
 set(PROJECT_DIR project)
 set(SOURCES ${PROJECT_DIR}/main.cpp
-            ${PROJECT_DIR}/src/loader/GlfwHandler.cpp
+            ${PROJECT_DIR}/src/window/glfw/GlfwHandler.cpp
+            ${PROJECT_DIR}/src/window/glfw/GlfwInputHandler.cpp
             ${PROJECT_DIR}/src/renderers/opengl/OpenGLRenderer.cpp
             ${PROJECT_DIR}/src/shaders/GlslShader.cpp
-            ${PROJECT_DIR}/include/loader/IWindowHandler.hpp
-            ${PROJECT_DIR}/include/loader/GlfwHandler.hpp
+            ${PROJECT_DIR}/src/game/PlayerInput.cpp
+            ${PROJECT_DIR}/include/window/IWindowHandler.hpp
+            ${PROJECT_DIR}/include/window/IInputHandler.hpp
+            ${PROJECT_DIR}/include/window/IInputListener.hpp
+            ${PROJECT_DIR}/include/window/glfw/GlfwHandler.hpp
+            ${PROJECT_DIR}/include/window/glfw/GlfwInputHandler.hpp
             ${PROJECT_DIR}/include/renderers/IRenderer.hpp
             ${PROJECT_DIR}/include/renderers/opengl/OpenGLRenderer.hpp
             ${PROJECT_DIR}/include/shaders/IShader.hpp
             ${PROJECT_DIR}/include/shaders/GlslShader.hpp
             ${PROJECT_DIR}/include/utilities/Utilities.hpp
+            ${PROJECT_DIR}/include/utilities/KeyCodes.hpp
+            ${PROJECT_DIR}/include/game/PlayerInput.hpp
             )
             
 add_executable(unnamed-sandbox-project ${SOURCES})

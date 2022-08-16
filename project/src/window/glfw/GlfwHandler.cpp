@@ -1,10 +1,12 @@
-#include "GlfwHandler.hpp"
+#include "glfw/GlfwHandler.hpp"
 
 #include <iostream>
 
 #include "IRenderer.hpp"
+#include "IInputHandler.hpp"
 
 IRenderer* GlfwHandler::_renderer = nullptr;
+IInputHandler* GlfwHandler::_inputHandler = nullptr;
 
 int GlfwHandler::Initialize(int width, int height)
 {
@@ -32,7 +34,8 @@ int GlfwHandler::Initialize(int width, int height)
         return -2;
     }
 
-    glfwSetFramebufferSizeCallback(_window, framebuffer_size_callback); 
+    glfwSetFramebufferSizeCallback(_window, framebuffer_size_callback);
+    glfwSetKeyCallback(_window, key_callback);
     glfwMakeContextCurrent(_window);
 
     return 0;
@@ -41,6 +44,11 @@ int GlfwHandler::Initialize(int width, int height)
 void GlfwHandler::SetRenderer(IRenderer* renderer)
 {
     _renderer = renderer;
+}
+
+void GlfwHandler::SetInputHandler(IInputHandler* inputHandler)
+{
+    _inputHandler = inputHandler;
 }
 
 void GlfwHandler::ProcessInput()
@@ -76,6 +84,11 @@ void* GlfwHandler::GetWindow()
 void GlfwHandler::error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
+}
+
+void GlfwHandler::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    _inputHandler->KeyEvent((KeyCode)key, (KeyAction)action);
 }
 
 void GlfwHandler::framebuffer_size_callback(GLFWwindow* window, int width, int height)
