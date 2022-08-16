@@ -3,18 +3,21 @@
 
 #include "IWindowHandler.hpp"
 
-__interface IRenderer;
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+class IRenderer;
 
 class GlfwHandler : public IWindowHandler
 {
 public:
     int Initialize(int width, int height);
     void SetRenderer(IRenderer* renderer);
-    void ProcessInput(GLFWwindow* window);
+    void ProcessInput();
     bool IsRunning();
     void PresentFrame();
     void Cleanup();
-    GLFWwindow* GetWindow();
+    void* GetWindow();
 
 private:
     GLFWwindow* _window;
@@ -23,7 +26,7 @@ private:
 
     static IRenderer* _renderer;
     static void error_callback(int error, const char* description);
-    static void framebuffer_size_callback(GLFWwindow* window, int width, int height); 
+    static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 };
 
 

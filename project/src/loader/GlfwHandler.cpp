@@ -43,11 +43,11 @@ void GlfwHandler::SetRenderer(IRenderer* renderer)
     _renderer = renderer;
 }
 
-void GlfwHandler::ProcessInput(GLFWwindow* window)
+void GlfwHandler::ProcessInput()
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if(glfwGetKey(_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
-        glfwSetWindowShouldClose(window, true);
+        glfwSetWindowShouldClose(_window, true);
     }
 }
 
@@ -68,7 +68,7 @@ void GlfwHandler::Cleanup()
     glfwTerminate();
 }
 
-GLFWwindow* GlfwHandler::GetWindow()
+void* GlfwHandler::GetWindow()
 {
     return _window;
 }
