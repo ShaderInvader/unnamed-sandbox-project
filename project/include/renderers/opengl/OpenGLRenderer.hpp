@@ -11,7 +11,7 @@ public:
 
     bool Initialize(void* windowHandle, int width, int height);
     void ResizeFramebuffer(int width, int height);
-    void Render();
+    void Render(IShader* shader);
     void Cleanup();
 
 private:

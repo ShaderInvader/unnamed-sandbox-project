@@ -59,7 +59,6 @@ void GlslShader::LoadShaderSource(const char* shaderCode, ShaderType type)
 
 void GlslShader::CreateProgram()
 {
-    unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
 
     if (vertexShader == 0)

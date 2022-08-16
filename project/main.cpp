@@ -3,12 +3,15 @@
 #include "GlfwHandler.hpp"
 #include "opengl/OpenGLRenderer.hpp"
 #include "GlslShader.hpp"
+#include "Utilities.hpp"
 
 constexpr int WIDTH = 1280;
 constexpr int HEIGHT = 800;
 
 int main(int, char**) 
 {
+    Utilities::LoadTextFile("shaders/SDF_Test.vert");
+
     IWindowHandler* windowHandler = new GlfwHandler();
     windowHandler->Initialize(WIDTH, HEIGHT);
 
@@ -24,8 +27,7 @@ int main(int, char**)
     // Update loop
     while (windowHandler->IsRunning())
     {
-        shader->Use();
-        renderer->Render();
+        renderer->Render(shader);
 
         windowHandler->PresentFrame();
     }

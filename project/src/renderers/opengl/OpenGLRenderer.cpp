@@ -1,8 +1,9 @@
 #include "opengl/OpenGLRenderer.hpp"
 
 #include <glad/glad.h>
-
 #include <iostream>
+
+#include "IShader.hpp"
 
 OpenGLRenderer::OpenGLRenderer()
 {
@@ -34,12 +35,12 @@ void OpenGLRenderer::ResizeFramebuffer(int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void OpenGLRenderer::Render()
+void OpenGLRenderer::Render(IShader* shader)
 {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    shader->Use();
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

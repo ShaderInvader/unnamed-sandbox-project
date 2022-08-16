@@ -12,6 +12,7 @@ add_subdirectory(thirdparty/glad)
 include_directories(project/include/loader)
 include_directories(project/include/renderers)
 include_directories(project/include/shaders)
+include_directories(project/include/utilities)
 
 set(PROJECT_DIR project)
 set(SOURCES ${PROJECT_DIR}/main.cpp
@@ -24,9 +25,14 @@ set(SOURCES ${PROJECT_DIR}/main.cpp
             ${PROJECT_DIR}/include/renderers/opengl/OpenGLRenderer.hpp
             ${PROJECT_DIR}/include/shaders/IShader.hpp
             ${PROJECT_DIR}/include/shaders/GlslShader.hpp
+            ${PROJECT_DIR}/include/utilities/Utilities.hpp
             )
             
 add_executable(unnamed-sandbox-project ${SOURCES})
+
+add_custom_command(TARGET unnamed-sandbox-project PRE_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${CMAKE_SOURCE_DIR}/resources/ $<TARGET_FILE_DIR:unnamed-sandbox-project>)
 
 #target_include_directories(unnamed-sandbox-project PRIVATE include/loader)
 

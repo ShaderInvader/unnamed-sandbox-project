@@ -24,7 +24,7 @@ private:
     unsigned int fragmentShader = 0;
     unsigned int geometryShader = 0;
 
-    unsigned int shaderProgram;
+    unsigned int shaderProgram = 0;
 };
 
 
