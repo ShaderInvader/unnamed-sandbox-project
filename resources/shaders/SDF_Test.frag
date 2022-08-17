@@ -57,7 +57,9 @@ vec3 rayMarch(vec3 rayOrigin, vec3 rayDirection)
             vec3 directionToLight = normalize(currentPosition - lightPositionTemp);
             vec3 normal = calculateNormal(currentPosition);
             float diffIntensity = max(0.0, dot(normal, directionToLight));
-            return vec3(diffIntensity);
+            float steps = float(i) / MAX_STEPS;
+            return vec3(steps);
+            //return vec3(diffIntensity);
             //return normal * 0.5 + 0.5;
             //return vec3(1.0, 1.0, 1.0);
         }
@@ -65,6 +67,7 @@ vec3 rayMarch(vec3 rayOrigin, vec3 rayDirection)
         if (distanceTraveled > MAX_DISTANCE)
         {
             // Break out of the loop as we exceeded the maximum ray distance
+            return vec3(0.0, 0.0, 0.0);
             break;
         }
 
@@ -73,6 +76,7 @@ vec3 rayMarch(vec3 rayOrigin, vec3 rayDirection)
     }
 
     // Nothing hit, return black
+    //return vec3(1.0, 0.0, 0.0);
     return vec3(0.0);
 }
 
