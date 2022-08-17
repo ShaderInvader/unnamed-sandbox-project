@@ -1,5 +1,9 @@
 #include <iostream>
 
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 #include "glfw/GlfwHandler.hpp"
 #include "glfw/GlfwInputHandler.hpp"
 #include "opengl/OpenGLRenderer.hpp"
@@ -35,14 +39,35 @@ int main(int, char**)
 
     GLFWwindow* window = (GLFWwindow*)windowHandler->GetWindow();
 
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 400");
+
     // Update loop
     while (windowHandler->IsRunning())
     {
-        windowHandler->ProcessInput();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        
         renderer->Render(shader);
+
+        ImGui::Begin("A glorious ImGui window.");
+        ImGui::Text("This is a test");
+        ImGui::End();
+        ImGui::ShowDemoWindow();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         windowHandler->PresentFrame();
     }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     shader->Cleanup();
     renderer->Cleanup();

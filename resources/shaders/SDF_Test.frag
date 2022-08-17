@@ -17,9 +17,10 @@ float distanceFromSphere(vec3 point, vec3 sphereCenter, float sphereRadius)
 
 float worldDistance(vec3 point)
 {
+    float displacement = cos(5.0 * point.x) * sin(5.0 * point.y) * sin(5.0 * point.z) * 0.25;
     float sphere_0 = distanceFromSphere(point, vec3(0.0), 1.0);
 
-    return sphere_0;
+    return sphere_0 + displacement;
 }
 
 vec3 calculateNormal(vec3 point)
@@ -38,7 +39,7 @@ vec3 calculateNormal(vec3 point)
 vec3 rayMarch(vec3 rayOrigin, vec3 rayDirection)
 {
     float distanceTraveled = 0.0;
-    const int MAX_STEPS = 32;
+    const int MAX_STEPS = 64;
     const float MAX_DISTANCE = 1000.0;
     const float HIT_THRESHOLD = 0.001;
 
@@ -52,9 +53,12 @@ vec3 rayMarch(vec3 rayOrigin, vec3 rayDirection)
 
         if (closestDistance < HIT_THRESHOLD)
         {
-            // Hit successful, return white
+            vec3 lightPositionTemp = vec3(2.0, -5.0, 3.0);
+            vec3 directionToLight = normalize(currentPosition - lightPositionTemp);
             vec3 normal = calculateNormal(currentPosition);
-            return normal * 0.5 + 0.5;
+            float diffIntensity = max(0.0, dot(normal, directionToLight));
+            return vec3(diffIntensity);
+            //return normal * 0.5 + 0.5;
             //return vec3(1.0, 1.0, 1.0);
         }
 
