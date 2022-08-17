@@ -17,6 +17,8 @@ public:
     virtual void CreateProgram() = 0;
     virtual void Cleanup() = 0;
     virtual void Use() = 0;
+
+    virtual void SetFloat(const char* name, float value) = 0;
 };
 
 #endif // ISHADER_HPP

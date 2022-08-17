@@ -15,6 +15,7 @@ public:
     virtual void PresentFrame() = 0;
     virtual void Cleanup() = 0;
     virtual void* GetWindow() = 0;
+    virtual float GetTime() = 0;
 };
 
 #endif // LOADER_HPP

@@ -53,12 +53,13 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         
+        shader->SetFloat("iTime", windowHandler->GetTime());
         renderer->Render(shader);
 
         ImGui::Begin("A glorious ImGui window.");
         ImGui::Text("This is a test");
         ImGui::End();
-        ImGui::ShowDemoWindow();
+        ImGui::ShowMetricsWindow();
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

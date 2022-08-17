@@ -19,6 +19,7 @@ public:
     void PresentFrame();
     void Cleanup();
     void* GetWindow();
+    float GetTime();
 
 private:
     GLFWwindow* _window;

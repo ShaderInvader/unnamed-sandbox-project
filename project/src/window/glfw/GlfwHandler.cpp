@@ -37,6 +37,7 @@ int GlfwHandler::Initialize(int width, int height)
     glfwSetFramebufferSizeCallback(_window, framebuffer_size_callback);
     glfwSetKeyCallback(_window, key_callback);
     glfwMakeContextCurrent(_window);
+    glfwSwapInterval(0);
 
     return 0;
 }
@@ -79,6 +80,11 @@ void GlfwHandler::Cleanup()
 void* GlfwHandler::GetWindow()
 {
     return _window;
+}
+
+float GlfwHandler::GetTime()
+{
+    return glfwGetTime();
 }
 
 void GlfwHandler::error_callback(int error, const char* description)

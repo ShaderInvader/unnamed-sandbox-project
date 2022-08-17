@@ -13,6 +13,8 @@ public:
     virtual void Use();
     virtual void Cleanup();
 
+    void SetFloat(const char* name, float value);
+
 private:
     void DebugCompilation(unsigned int shader);
     void DebugLinking(unsigned int shaderProgram);
@@ -26,6 +28,5 @@ private:
 
     unsigned int shaderProgram = 0;
 };
-
 
 #endif // GLSL_SHADER_HPP

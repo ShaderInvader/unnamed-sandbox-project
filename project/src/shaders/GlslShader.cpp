@@ -95,6 +95,11 @@ void GlslShader::Use()
     glUseProgram(shaderProgram);
 }
 
+void GlslShader::SetFloat(const char* name, float value)
+{
+    glUniform1f(glGetUniformLocation(shaderProgram, name), value);
+}
+
 void GlslShader::Cleanup()
 {
     
