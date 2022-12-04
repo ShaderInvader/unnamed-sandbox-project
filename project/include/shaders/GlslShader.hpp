@@ -14,6 +14,7 @@ public:
     virtual void Cleanup();
 
     void SetFloat(const char* name, float value);
+    void SetVec3(const char* name, float x, float y, float z);
 
 private:
     void DebugCompilation(unsigned int shader);

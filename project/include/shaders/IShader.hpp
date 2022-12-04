@@ -19,6 +19,7 @@ public:
     virtual void Use() = 0;
 
     virtual void SetFloat(const char* name, float value) = 0;
+    virtual void SetVec3(const char* name, float x, float y, float z) = 0;
 };
 
 #endif // ISHADER_HPP

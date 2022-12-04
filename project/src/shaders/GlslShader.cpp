@@ -100,6 +100,11 @@ void GlslShader::SetFloat(const char* name, float value)
     glUniform1f(glGetUniformLocation(shaderProgram, name), value);
 }
 
+void GlslShader::SetVec3(const char* name, float x, float y, float z)
+{
+    glUniform3f(glGetUniformLocation(shaderProgram, name), x, y, z);
+}
+
 void GlslShader::Cleanup()
 {
     

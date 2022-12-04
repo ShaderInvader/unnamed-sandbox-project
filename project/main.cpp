@@ -12,8 +12,8 @@
 
 #include "PlayerInput.hpp"
 
-constexpr int WIDTH = 1280;
-constexpr int HEIGHT = 800;
+constexpr int WIDTH = 1920;
+constexpr int HEIGHT = 1080;
 
 int main(int, char**) 
 {
@@ -30,7 +30,8 @@ int main(int, char**)
     windowHandler->SetRenderer(renderer);
 
     std::string vertexShader = Utilities::LoadTextFile("shaders/SDF_Test.vert");
-    std::string fragmentShader = Utilities::LoadTextFile("shaders/SDF_Test.frag");
+    //std::string fragmentShader = Utilities::LoadTextFile("shaders/SDF_Test.frag");
+    std::string fragmentShader = Utilities::LoadTextFile("shaders/VoxelLodTest.frag");
 
     IShader* shader = new GlslShader();
     shader->LoadShaderSource(vertexShader.c_str(), ShaderType::Vertex);
@@ -53,7 +54,13 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         
+        int width, height;
+        renderer->GetScreenSize(width, height);
+
         shader->SetFloat("iTime", windowHandler->GetTime());
+        shader->SetFloat("aspectRatio", static_cast<float>(height) / width);
+        shader->SetVec3("iResolution", static_cast<float>(width), static_cast<float>(height), 0.0f);
+        shader->SetVec3("iMouse", 0.0f, 0.0f, 0.0f);
         renderer->Render(shader);
 
         ImGui::Begin("A glorious ImGui window.");

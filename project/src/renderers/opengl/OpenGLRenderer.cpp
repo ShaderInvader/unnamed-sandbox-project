@@ -23,8 +23,7 @@ bool OpenGLRenderer::Initialize(void* windowHandle, int width, int height)
         return false;
     }
 
-    glViewport(0, 0, width, height);
-
+    ResizeFramebuffer(width, height);
     SetupQuad();
 
     return true;
@@ -33,6 +32,14 @@ bool OpenGLRenderer::Initialize(void* windowHandle, int width, int height)
 void OpenGLRenderer::ResizeFramebuffer(int width, int height)
 {
     glViewport(0, 0, width, height);
+    screenWidth = width;
+    screenHeight = height;
+}
+
+void OpenGLRenderer::GetScreenSize(int& width, int& height)
+{
+    width = screenWidth;
+    height = screenHeight;
 }
 
 void OpenGLRenderer::Render(IShader* shader)
